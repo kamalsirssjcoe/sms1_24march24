@@ -22,6 +22,24 @@ app.post("/save", (req, res) => {
 	});
 });
 
+app.get("/getdata", (req, res) => {
+	let sql = "select * from student";
+	con.query(sql, (err, result) => {
+		if (err)		res.send(err);
+		else			res.send(result);
+	});
+});
+
+
+app.delete("/remove", (req, res) => {
+	let data = [req.body.rno]
+	let sql = "delete from student where rno = ?";
+	con.query(sql, data, (err, result) => {
+		if (err)		res.send(err);
+		else			res.send(result);
+	});
+});
+
 
 app.listen(9000, () => { console.log("ready @ 9000") });
 
